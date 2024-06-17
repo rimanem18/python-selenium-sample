@@ -60,12 +60,18 @@ def wait_for_element(driver, by, value, timeout=10):
     except Exception as e:
         print(f"Exception while waiting for element: {e}")
 
-def save_screenshot(driver, directory="screenshots"):
+def save_screenshot(driver, directory="screenshots", full_page=False):
     try:
         if not os.path.exists(directory):
             os.makedirs(directory)
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         screenshot_path = os.path.join(directory, f"screenshot_{timestamp}.png")
+
+        if full_page:
+            total_width = driver.execute_script("return document.body.scrollWidth")
+            total_height = driver.execute_script("return document.body.scrollHeight")
+            driver.set_window_size(total_width, total_height)
+
         driver.save_screenshot(screenshot_path)
         print(f"Screenshot saved to: {screenshot_path}")
     except Exception as e:
