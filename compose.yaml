@@ -2,5 +2,5 @@ services:
   app:
     build: .
     volumes:
-      - ./src:/app
+      - ./app:/app
     tty: true

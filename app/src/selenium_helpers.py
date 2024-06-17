@@ -19,6 +19,7 @@ def init_driver():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--remote-debugging-port=9222')
+    options.add_argument("--lang=ja")
 
     service = ChromeService(executable_path=chrome_driver_path)
     driver = webdriver.Chrome(service=service, options=options)

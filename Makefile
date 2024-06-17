@@ -43,4 +43,6 @@ fmt:
 	docker compose exec app bash -c 'black .'
 
 run:
-	docker compose exec app bash -c 'python ./main.py'
+	docker compose exec app bash -c 'python /app/src/main.py'
+test:
+	docker compose exec app bash -c 'python -m pytest -s'

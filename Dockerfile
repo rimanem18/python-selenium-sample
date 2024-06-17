@@ -38,7 +38,7 @@ RUN wget https://storage.googleapis.com/chrome-for-testing-public/${CHROME_DRIVE
     chmod +x /usr/bin/chromedriver
 
 # ソースコードをコピー
-COPY src/ .
+COPY ./ /app
 
 # bashをデフォルトシェルに設定
 SHELL ["/bin/bash", "-c"]
