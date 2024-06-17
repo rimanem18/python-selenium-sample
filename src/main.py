@@ -1,4 +1,5 @@
 from utils import click_button_by_type, init_driver, input_to_field, click_button_by_text, save_screenshot, wait_for_element
+from getpass import getpass
 from selenium.webdriver.common.by import By
 
 if __name__ == "__main__":
@@ -11,7 +12,7 @@ if __name__ == "__main__":
     input_to_field(driver, "username", value)
 
     # パスワードを入力
-    value = input("Enter your password: ")
+    value = getpass("Enter your password: ")
     input_to_field(driver, "password", value)
 
     # ログインボタンをクリック（ボタンの表示テキストを指定）
