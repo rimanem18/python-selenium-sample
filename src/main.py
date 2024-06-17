@@ -26,6 +26,7 @@ try:
 
     driver.get("https://example.com")
     print("Title:", driver.title)
+    driver.save_screenshot('screenshot/screenshot.png')  # スクリーンショットを保存
     driver.quit()
 
 except Exception as e:
