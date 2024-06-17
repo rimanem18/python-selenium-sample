@@ -1,5 +1,7 @@
 FROM python:3.10-slim
 
+ENV CHROME_DRIVER_VERSION=126.0.6478.61
+
 # 必要なパッケージのインストール
 RUN apt-get update && apt-get install -y \
     bash \
@@ -27,11 +29,11 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearm
     apt-get install -y google-chrome-stable
 
 # ChromeDriverをインストール
-RUN wget https://storage.googleapis.com/chrome-for-testing-public/126.0.6478.61/linux64/chromedriver-linux64.zip  && \
-unzip chromedriver-linux64.zip  && \
-mv chromedriver-linux64/chromedriver /usr/bin/chromedriver  && \ 
-chown root:root /usr/bin/chromedriver  && \ 
-chmod +x /usr/bin/chromedriver
+RUN wget https://storage.googleapis.com/chrome-for-testing-public/${CHROME_DRIVER_VERSION}/linux64/chromedriver-linux64.zip  && \
+    unzip chromedriver-linux64.zip  && \
+    mv chromedriver-linux64/chromedriver /usr/bin/chromedriver  && \ 
+    chown root:root /usr/bin/chromedriver  && \ 
+    chmod +x /usr/bin/chromedriver
 
 # ソースコードをコピー
 COPY src/ .
