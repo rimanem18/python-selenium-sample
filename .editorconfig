@@ -1,0 +1,59 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# ルートプロジェクトを指定
+root = true
+
+# Pythonファイルに適用する規則
+[*.py]
+# インデントスタイルはスペース
+indent_style = space
+# インデントサイズは4
+indent_size = 4
+# 末尾に改行を追加
+insert_final_newline = true
+# 末尾の余分なスペースを削除
+trim_trailing_whitespace = true
+
+# YAMLファイルに適用する規則
+[*.yml]
+[*.yaml]
+# インデントスタイルはスペース
+indent_style = space
+# インデントサイズは2
+indent_size = 2
+# 末尾に改行を追加
+insert_final_newline = true
+# 末尾の余分なスペースを削除
+trim_trailing_whitespace = true
+
+# Markdownファイルに適用する規則
+[*.md]
+# インデントスタイルはスペース
+indent_style = space
+# インデントサイズは4
+indent_size = 4
+# 末尾に改行を追加
+insert_final_newline = true
+# 末尾の余分なスペースを削除
+trim_trailing_whitespace = true
+
+# JSONファイルに適用する規則
+[*.json]
+# インデントスタイルはスペース
+indent_style = space
+# インデントサイズは2
+indent_size = 2
+# 末尾に改行を追加
+insert_final_newline = true
+# 末尾の余分なスペースを削除
+trim_trailing_whitespace = true
+
+# 一般的なテキストファイルに適用する規則
+[*.txt]
+# 末尾に改行を追加
+insert_final_newline = true
+# 末尾の余分なスペースを削除
+trim_trailing_whitespace = true
+
+[Makefile]
+indent_style = tab
