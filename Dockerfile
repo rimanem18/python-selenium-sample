@@ -15,6 +15,8 @@ RUN apt-get update && apt-get install -y \
     libgconf-2-4 \
     libnss3 \
     libglib2.0-0 \
+    fonts-ipafont-gothic \
+    fonts-ipafont-mincho \
     && rm -rf /var/lib/apt/lists/*
 
 # Pythonの依存関係をインストール

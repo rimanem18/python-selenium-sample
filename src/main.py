@@ -1,33 +1,28 @@
-import os
-from dotenv import load_dotenv
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
+from utils import click_button_by_type, init_driver, input_to_field, click_button_by_text, save_screenshot, wait_for_element
 from selenium.webdriver.common.by import By
 
-# .env ファイルの内容を読み込む
-load_dotenv()
+if __name__ == "__main__":
+    url = input("Enter the URL of the page you want to scrape: ")
+    driver = init_driver()
+    driver.get(url)
 
-chrome_path = "/usr/bin/google-chrome-stable"
-chrome_driver_path = "/usr/bin/chromedriver"
+    # ユーザー名を入力
+    value = input("Enter your username: ")
+    input_to_field(driver, "username", value)
 
-print(f"Chrome path: {chrome_path}")
-print(f"ChromeDriver path: {chrome_driver_path}")
+    # パスワードを入力
+    value = input("Enter your password: ")
+    input_to_field(driver, "password", value)
 
-options = webdriver.ChromeOptions()
-options.binary_location = chrome_path
-options.add_argument('--headless')  # ヘッドレスモード（ブラウザを表示しない）
-options.add_argument('--no-sandbox') # 制約の多い環境で動作させる
-options.add_argument('--disable-dev-shm-usage') # メモリ不足の問題を回避
-options.add_argument('--remote-debugging-port=9222')  # デバッグ用のポートを指定
+    # ログインボタンをクリック（ボタンの表示テキストを指定）
+    click_button_by_type(driver, "submit")
 
-try:
-    service = ChromeService(executable_path=chrome_driver_path)
-    driver = webdriver.Chrome(service=service, options=options)
+    # 例：ログイン後のページが読み込まれるのを待機（特定の要素を待機）
+    wait_id = input("Enter the ID of the element you want to wait for: ")
+    wait_for_element(driver, By.ID, wait_id)
 
-    driver.get("https://example.com")
-    print("Title:", driver.title)
-    driver.save_screenshot('screenshot/screenshot.png')  # スクリーンショットを保存
+    # その他の操作...
+    save_screenshot(driver)
+
+    # 最後にブラウザを閉じる
     driver.quit()
-
-except Exception as e:
-    print(f"Exception: {e}")
