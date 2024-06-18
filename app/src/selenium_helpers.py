@@ -75,5 +75,6 @@ def save_screenshot(driver, directory="screenshots", full_page=False):
 
         driver.save_screenshot(screenshot_path)
         print(f"Screenshot saved to: {screenshot_path}")
+        return screenshot_path
     except Exception as e:
         print(f"Exception while saving screenshot: {e}")
