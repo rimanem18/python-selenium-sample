@@ -1,5 +1,6 @@
-from selenium_helpers import click_button_by_type, init_driver, input_to_field, click_button_by_text, save_screenshot, wait_for_element
-from getpass import getpass
+import os
+from sheet_helpers import authenticate, append
+from selenium_helpers import init_driver, save_screenshot
 from selenium.webdriver.common.by import By
 
 if __name__ == "__main__":
@@ -7,25 +8,24 @@ if __name__ == "__main__":
     driver = init_driver()
     driver.get(url)
 
-    # ユーザー名を入力
-    # value = input("Enter your username: ")
-    # input_to_field(driver, "username", value)
-    value = input("Enter your email: ")
-    input_to_field(driver, "email", value)
-
-    # パスワードを入力
-    value = getpass("Enter your password: ")
-    input_to_field(driver, "password", value)
-
-    # ログインボタンをクリック（ボタンのタイプを指定）
-    click_button_by_type(driver, "submit")
-
-    # 例：ログイン後のページが読み込まれるのを待機（特定の要素を待機）
-    wait_id = input("Enter the ID of the element you want to wait for: ")
-    wait_for_element(driver, By.ID, wait_id)
-
     # 全体のスクリーンショットを撮影
-    save_screenshot(driver, full_page=True)
+    img_file = save_screenshot(driver, full_page=True)
+
+    # タイトル取得
+    page_title = driver.title
+    print(page_title)
+
+    # スプレッドシート認証
+    credentials_file = os.getenv("CREDENTIALS_FILE")
+    client = authenticate(credentials_file)
+
+    # スプレッドシートにデータを追加
+    spreadsheet_id = os.getenv("SPREADSHEET_ID")
+    sheet_name = input("Enter the name of the sheet you want to append to: ")
+
+    # メッセージを入力
+    message = input("Enter a message to append to the sheet: ")
+    append(client, spreadsheet_id, sheet_name, [page_title, url, message, img_file])
 
     # 最後にブラウザを閉じる
     driver.quit()

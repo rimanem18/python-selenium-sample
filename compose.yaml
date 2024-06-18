@@ -4,3 +4,6 @@ services:
     volumes:
       - ./app:/app
     tty: true
+    env_file:
+      - .env
+
